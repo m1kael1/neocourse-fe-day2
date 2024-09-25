@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 
-const WelcomePage = () => {
+const SignInForm = () => {
   const navigate = useNavigate();
 
   return (
@@ -41,4 +41,4 @@ const WelcomePage = () => {
   );
 };
 
-export default WelcomePage;
+export default SignInForm;

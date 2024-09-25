@@ -31,7 +31,7 @@ const Header = () => {
         inScroll ? "shadow-lg bg-white sticky top-0 " : "-top-96"
       }`}
     >
-      <div className='container mx-auto flex justify-between items-center py-5 '>
+      <div className='container mx-auto flex justify-between items-center py-5 max-w-7xl'>
         <h2 className='text-3xl'>Neobook</h2>
         <ul className='flex gap-5'>
           {menu.map(({ name, link }) => (

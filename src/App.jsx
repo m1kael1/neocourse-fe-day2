@@ -1,4 +1,3 @@
-import ListBook from "./pages/books";
 import Welcome from "./pages/welcome";
 
 function App() {

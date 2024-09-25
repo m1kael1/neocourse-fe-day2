@@ -1,6 +1,6 @@
 import SigninForm from "../components/form/sign-in-form";
 
-const Signin = () => {
+const Welcome = () => {
   return (
     <section className='grid grid-cols-2 h-screen p-10 gap-10'>
       <div className='w-full max-h-screen overflow-hidden '>
@@ -15,4 +15,4 @@ const Signin = () => {
   );
 };
 
-export default Signin;
+export default Welcome;
