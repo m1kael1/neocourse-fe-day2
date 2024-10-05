@@ -1,7 +1,7 @@
-import Welcome from "./pages/welcome";
+import Books from "./pages/books";
 
 function App() {
-  return <Welcome />;
+  return <Books />;
 }
 
 export default App;

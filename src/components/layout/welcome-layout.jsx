@@ -1,6 +1,4 @@
-import SigninForm from "../components/form/sign-in-form";
-
-const Welcome = () => {
+const WelcomeLayout = ({ children }) => {
   return (
     <section className='grid grid-cols-2 h-screen p-10 gap-10'>
       <div className='w-full max-h-screen overflow-hidden '>
@@ -10,9 +8,9 @@ const Welcome = () => {
           alt=''
         />
       </div>
-      <SigninForm />
+      {children}
     </section>
   );
 };
 
-export default Welcome;
+export default WelcomeLayout;

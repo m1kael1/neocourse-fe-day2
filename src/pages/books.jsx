@@ -1,12 +1,9 @@
-import { CardBook } from "../components/card/card-book";
 import FilterBooks from "../components/filter-books";
-import Header from "../components/header";
 import ListBook from "../components/list-book";
 
 const Books = () => {
   return (
-    <section>
-      <Header />
+    <>
       <div
         style={{
           backgroundImage:
@@ -22,7 +19,7 @@ const Books = () => {
         <br />
         <ListBook />
       </div>
-    </section>
+    </>
   );
 };
 
