@@ -1,4 +1,4 @@
-import { BookPlus, BookUser, Library, LogOutIcon } from "lucide-react";
+import { BookUser, Library, LogOutIcon } from "lucide-react";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { BorrowedList } from "./borowed-list";

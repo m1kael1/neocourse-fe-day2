@@ -1,6 +1,5 @@
 import { useAtom } from "jotai"
 import { authUserAtom } from "../lib/atoms"
-import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { authenticateUser, newAuthUser } from "../api/auth"
 

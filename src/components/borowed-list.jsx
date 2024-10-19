@@ -1,57 +1,27 @@
+import { useAtom } from "jotai";
 import { BookMarked, X } from "lucide-react";
 import React, { useState } from "react";
+import { borrowsAtom } from "../lib/atoms";
+import useAuth from "../hooks/use-auth";
 
 export const BorrowedList = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
-  // Sample data for books, with borrow status
-  const [books, setBooks] = useState([
-    {
-      id: 1,
-      title: "The Hobbit",
-      author: "J.R.R. Tolkien",
-      is_borrowed: true,
-      borrowed_by: "User1",
-    },
-    {
-      id: 2,
-      title: "1984",
-      author: "George Orwell",
-      is_borrowed: false,
-      borrowed_by: "",
-    },
-    {
-      id: 3,
-      title: "To Kill a Mockingbird",
-      author: "Harper Lee",
-      is_borrowed: true,
-      borrowed_by: "User2",
-    },
-    {
-      id: 4,
-      title: "The Catcher in the Rye",
-      author: "J.D. Salinger",
-      is_borrowed: true,
-      borrowed_by: "User1",
-    },
-  ]);
+  const [borrows, setBorrows] = useAtom(borrowsAtom);
+  const { data: authUserData } = useAuth();
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
-  // Function to return a book
   const handleReturn = (bookId) => {
-    setBooks((prevBooks) =>
+    // sementara
+    setBorrows((prevBooks) =>
       prevBooks.map((book) =>
-        book.id === bookId
-          ? { ...book, is_borrowed: false, borrowed_by: "" }
-          : book
+        book.ID === bookId ? { ...book, Borrows: null } : book
       )
     );
   };
 
-  // Filter books that are borrowed by the current user (User1 in this case)
-  const borrowedBooks = books.filter(
-    (book) => book.is_borrowed && book.borrowed_by === "User1"
+  const borrowedBooks = borrows.filter(
+    (book) => book.Borrows === authUserData?.user?.ID
   );
 
   return (
@@ -92,16 +62,16 @@ export const BorrowedList = () => {
             {borrowedBooks.length ? (
               borrowedBooks.map((book) => (
                 <li
-                  key={book.id}
+                  key={book.ID}
                   className='p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors shadow-sm'
                 >
-                  <h4 className='text-md font-semibold'>{book.title}</h4>
-                  <p className='text-sm text-gray-600'>{book.author}</p>
+                  <h4 className='text-md font-semibold'>{book.Title}</h4>
+                  <p className='text-sm text-gray-600'>{book.Author}</p>
 
                   {/* Return Button */}
                   <button
                     className='mt-2 py-1 px-3 rounded-md bg-red-500 text-white hover:bg-red-600 transition-colors'
-                    onClick={() => handleReturn(book.id)}
+                    onClick={() => handleReturn(book.ID)}
                   >
                     Return
                   </button>

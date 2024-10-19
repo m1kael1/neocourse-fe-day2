@@ -16,13 +16,6 @@ const bookAtom = atom({
   borrowed_by: "" // user id fk 
 })
 
-const borrow = atom({
-  id: "",
-  book_id: "",
-  user_id: "",
-  borrowed_at: "",
-})
-
 const borrowsAtom = atom([])
 
-export { authUserAtom, bookAtom, borrow, borrowsAtom }
+export { authUserAtom, bookAtom, borrowsAtom }

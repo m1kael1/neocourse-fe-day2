@@ -26,7 +26,7 @@ const postBook = async (bookData) => {
 
 const borrowBook = async (bookId) => {
   try {
-    const response = await instance.post('/book/borrow', {
+    const response = await instance.post(`/book/${bookId}/borrow`, {
       book_id: bookId
     });
     if (!response.data) {

@@ -1,29 +1,37 @@
-import React, { useState } from "react";
-import BookCover from "../../assets/example-book-cover.jpg";
+import { useState } from "react";
 import { useBook } from "../../hooks/use-book";
 import { X } from "lucide-react";
+import { useAtom } from "jotai";
+import { borrowsAtom } from "../../lib/atoms";
+import useAuth from "../../hooks/use-auth";
 
 export const CardBook = ({ data }) => {
   const { ID, Title, Description, Author, Year, ImageURI, Borrows } = data;
   const { borrowBookMutation } = useBook();
+  const { data: userAuthData } = useAuth();
+  const [, setBorrows] = useAtom(borrowsAtom);
 
-  // State to control modal visibility
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [borrowStatus, setBorrowStatus] = useState(Borrows !== null);
-
-  // Function to toggle modal visibility
   const toggleModal = () => setIsModalOpen(!isModalOpen);
 
-  // Function to handle borrow action
   const handleBorrow = () => {
-    if (!borrowStatus) {
-      setBorrowStatus(true);
-      borrowBookMutation.mutate(ID, {
-        onSuccess: () => {
-          alert(`${Title} has been borrowed!`);
-        },
-      });
-    }
+    // borrowBookMutation.mutate(ID, {
+    //   onSuccess: () => {
+    //     alert(`${Title} has been borrowed!`);
+    //   },
+    // });
+    setBorrows((prevBorrows) => [
+      ...prevBorrows,
+      {
+        ID,
+        Title,
+        Description,
+        Author,
+        Year,
+        ImageURI,
+        Borrows: userAuthData?.user?.ID,
+      },
+    ]);
   };
 
   return (
@@ -32,7 +40,7 @@ export const CardBook = ({ data }) => {
       <div className='w-[300px] sm:w-full shadow-lg rounded-xl overflow-hidden bg-white cursor-pointer transform transition-all hover:scale-105 hover:shadow-xl'>
         <div className='relative w-full h-72 bg-gradient-to-b from-green-400 to-blue-400 overflow-hidden'>
           <img
-            src={ImageURI || BookCover}
+            src={ImageURI}
             alt={Title}
             className='w-full h-full object-cover object-center rounded-t-xl'
           />
@@ -72,7 +80,7 @@ export const CardBook = ({ data }) => {
             {/* Book details */}
             <div className='flex items-start space-x-4'>
               <img
-                src={ImageURI || BookCover}
+                src={ImageURI}
                 alt={Title}
                 className='w-24 h-36 object-cover rounded-md shadow-md'
               />
@@ -82,17 +90,12 @@ export const CardBook = ({ data }) => {
                 <p className='text-gray-500'>{Year}</p>
                 <p className='text-gray-700 mt-2'>
                   Status:{" "}
-                  {borrowStatus ? (
+                  {Borrows ? (
                     <span className='text-red-500'>Borrowed</span>
                   ) : (
                     <span className='text-green-500'>Available</span>
                   )}
                 </p>
-                {borrowStatus && (
-                  <p className='text-gray-500 mt-1 text-sm'>
-                    Borrowed by: {Borrows ? Borrows.name : "Unknown"}
-                  </p>
-                )}
               </div>
             </div>
 
@@ -103,14 +106,14 @@ export const CardBook = ({ data }) => {
             <div className='mt-6 flex justify-end'>
               <button
                 className={`py-2 px-4 rounded-md font-medium text-white transition-colors ${
-                  borrowStatus
+                  Borrows
                     ? "bg-gray-400 cursor-not-allowed"
                     : "bg-blue-500 hover:bg-blue-600"
                 }`}
                 onClick={handleBorrow}
-                disabled={borrowStatus}
+                disabled={Borrows}
               >
-                {borrowStatus ? "Unavailable" : "Borrow"}
+                {Borrows ? "Unavailable" : "Borrow"}
               </button>
               <button
                 className='py-2 px-4 ml-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors'
