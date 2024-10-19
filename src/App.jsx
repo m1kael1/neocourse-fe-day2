@@ -1,7 +1,7 @@
-import Books from "./pages/books";
+import Library from "./pages/library";
 
 function App() {
-  return <Books />;
+  return <Library />;
 }
 
 export default App;

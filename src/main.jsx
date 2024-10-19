@@ -6,6 +6,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import SignIn from "./pages/sign-in.jsx";
 import SignUp from "./pages/sign-up.jsx";
 import MainLayout from "./components/layout/main-layout.jsx";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import MyBooks from "./pages/my-books.jsx";
 
 const router = createBrowserRouter([
   {
@@ -13,6 +15,14 @@ const router = createBrowserRouter([
     element: (
       <MainLayout>
         <App />
+      </MainLayout>
+    ),
+  },
+  {
+    path: "/my-books",
+    element: (
+      <MainLayout>
+        <MyBooks />
       </MainLayout>
     ),
   },
@@ -26,8 +36,12 @@ const router = createBrowserRouter([
   },
 ]);
 
+const queryClient = new QueryClient();
+
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   </StrictMode>
 );

@@ -1,35 +1,71 @@
+import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { signupFormSchema } from "../../lib/schema";
+import useAuth from "../../hooks/use-auth";
+import { InputField } from "./input-field";
 
 const SignUpForm = () => {
+  const { signUp } = useAuth();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(signupFormSchema),
+  });
+
+  const onSubmit = (data) => {
+    console.log(data);
+    signUp(data.name, data.username, data.email, data.password);
+  };
+
   return (
     <section>
-      <form className='flex flex-col gap-5 items-center mt-24 max-w-xl mx-auto'>
+      <form
+        className='flex flex-col gap-5 items-center mt-24 max-w-xl mx-auto'
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <h1 className='text-5xl font-bold'>Sign Up</h1>
         <p className='mb-5'>Sign Up to access your Neobook account</p>
-        <div className='flex flex-col w-full gap-7 '>
-          <input
-            type='text'
+        <div className='flex flex-col w-full gap-7  '>
+          <InputField
+            name='name'
+            placeholder='Name'
+            validation={{ required: true }}
+            errors={errors}
+            register={register}
+          />
+
+          <InputField
             name='username'
-            id='username'
-            className='border-2 h-14 p-2 rounded-xl'
             placeholder='Username'
+            validation={{ required: true }}
+            errors={errors}
+            register={register}
           />
-          <input
-            type='email'
+
+          <InputField
             name='email'
-            id='email'
-            className='border-2 h-14 p-2 rounded-xl'
             placeholder='Email'
+            validation={{ required: true }}
+            errors={errors}
+            register={register}
           />
-          <input
-            type='password'
+
+          <InputField
             name='password'
-            id='password'
-            className='border-2 h-14 p-2 rounded-xl'
+            type='password'
             placeholder='Password'
+            validation={{ required: true }}
+            errors={errors}
+            register={register}
           />
         </div>
-        <button className='p-2 bg-[#515DEF] w-full text-white rounded-sm'>
+        <button
+          type='submit'
+          className='p-2 bg-[#515DEF] w-full text-white rounded-sm'
+        >
           Sign Up
         </button>
       </form>

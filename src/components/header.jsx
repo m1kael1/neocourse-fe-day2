@@ -1,19 +1,14 @@
+import { BookPlus, BookUser, Library, LogOutIcon } from "lucide-react";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { BorrowedList } from "./borowed-list";
+import useAuth from "../hooks/use-auth";
 
 const Header = () => {
-  const menu = [
-    {
-      name: "Books",
-      link: "/books",
-    },
-    {
-      name: "Booking",
-      link: "/booking",
-    },
-  ];
-  const activeMenu = "Books";
   const [inScroll, setInScroll] = useState(false);
+  const currentPath = useLocation().pathname;
+  const { data, signOut } = useAuth(currentPath);
+  const location = useLocation();
 
   const handleScroll = () => {
     if (window.scrollY > 0) {
@@ -26,26 +21,59 @@ const Header = () => {
   window.addEventListener("scroll", handleScroll);
 
   return (
-    <nav
-      className={`bg-white sticky z-50 w-full transition-all ease-in-out duration-500 delay-200 ${
-        inScroll ? "shadow-lg bg-white sticky top-0 " : "-top-96"
-      }`}
-    >
-      <div className='container mx-auto flex justify-between items-center py-5 max-w-7xl'>
-        <h2 className='text-3xl'>Neobook</h2>
-        <ul className='flex gap-5'>
-          {menu.map(({ name, link }) => (
-            <li
-              key={name}
-              className={`text-black 
-                ${activeMenu === name && `font-bold border-b-4 border-black`}`}
-            >
-              <Link to={link}>{name}</Link>
+    <>
+      <nav
+        className={`bg-white sticky z-50 w-full transition-all ease-in-out duration-500 delay-200 ${
+          inScroll ? "shadow-lg bg-white top-0" : "-top-96"
+        }`}
+      >
+        <div className='container mx-auto flex justify-between items-center py-5 max-w-7xl px-4 sm:px-6 lg:px-8'>
+          <div className='flex items-center justify-start space-x-4'>
+            <span className='text-xl sm:text-2xl font-semibold text-gray-800'>
+              Welcome, <strong>{data?.user.Name}!</strong>
+            </span>
+          </div>
+
+          <ul className='flex gap-5 items-center'>
+            <li>
+              <Link
+                to='/'
+                className={`flex items-center gap-1 ${
+                  location.pathname === "/" ? "text-blue-600" : "text-gray-700"
+                } hover:text-blue-600 transition-colors duration-300`}
+              >
+                <Library className='cursor-pointer' />
+                <span className='hidden md:inline'>Library</span>
+              </Link>
             </li>
-          ))}
-        </ul>
-      </div>
-    </nav>
+
+            <li>
+              <Link
+                to='/my-books'
+                className={`flex items-center gap-1 ${
+                  location.pathname === "/my-books"
+                    ? "text-blue-600"
+                    : "text-gray-700"
+                } hover:text-blue-600 transition-colors duration-300`}
+              >
+                <BookUser className='cursor-pointer' />
+                <span className='hidden md:inline'>My Books</span>
+              </Link>
+            </li>
+
+            <li>
+              <BorrowedList />
+            </li>
+          </ul>
+
+          {/* Logout Icon */}
+          <LogOutIcon
+            onClick={signOut}
+            className='cursor-pointer text-gray-700 hover:text-red-600 transition-colors duration-300'
+          />
+        </div>
+      </nav>
+    </>
   );
 };
 

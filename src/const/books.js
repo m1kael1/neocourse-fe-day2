@@ -1,0 +1,222 @@
+export const books = [
+  {
+    id: "1",
+    title: "The Great Gatsby",
+    author: "F. Scott Fitzgerald",
+    description: "A novel about the American dream and tragic love story.",
+    image: "great_gatsby.jpg",
+    genre: "Classic",
+    published_year: "1925",
+    is_borrowed: false,
+    borrowed_by: ""
+  },
+  {
+    id: "2",
+    title: "To Kill a Mockingbird",
+    author: "Harper Lee",
+    description: "A gripping, heart-wrenching story of racial injustice in the deep South.",
+    image: "to_kill_a_mockingbird.jpg",
+    genre: "Fiction",
+    published_year: "1960",
+    is_borrowed: true,
+    borrowed_by: "102"
+  },
+  {
+    id: "3",
+    title: "1984",
+    author: "George Orwell",
+    description: "A dystopian novel set in a totalitarian regime that controls everything.",
+    image: "1984.jpg",
+    genre: "Dystopian",
+    published_year: "1949",
+    is_borrowed: false,
+    borrowed_by: ""
+  },
+  {
+    id: "4",
+    title: "The Catcher in the Rye",
+    author: "J.D. Salinger",
+    description: "A novel about teenage alienation and the rebellion against societal norms.",
+    image: "catcher_in_the_rye.jpg",
+    genre: "Fiction",
+    published_year: "1951",
+    is_borrowed: true,
+    borrowed_by: "110"
+  },
+  {
+    id: "5",
+    title: "Pride and Prejudice",
+    author: "Jane Austen",
+    description: "A witty romantic comedy about the manners and matrimonial machinations of early 19th century England.",
+    image: "pride_and_prejudice.jpg",
+    genre: "Romance",
+    published_year: "1813",
+    is_borrowed: false,
+    borrowed_by: ""
+  },
+  {
+    id: "6",
+    title: "Moby-Dick",
+    author: "Herman Melville",
+    description: "The epic tale of Captain Ahab's obsessive quest to kill the white whale.",
+    image: "moby_dick.jpg",
+    genre: "Adventure",
+    published_year: "1851",
+    is_borrowed: false,
+    borrowed_by: ""
+  },
+  {
+    id: "7",
+    title: "Brave New World",
+    author: "Aldous Huxley",
+    description: "A futuristic society where humans are engineered and conditioned for stability and happiness.",
+    image: "brave_new_world.jpg",
+    genre: "Dystopian",
+    published_year: "1932",
+    is_borrowed: true,
+    borrowed_by: "115"
+  },
+  {
+    id: "8",
+    title: "War and Peace",
+    author: "Leo Tolstoy",
+    description: "A monumental Russian epic about Napoleon's invasion of Russia and the impact on Russian society.",
+    image: "war_and_peace.jpg",
+    genre: "Historical",
+    published_year: "1869",
+    is_borrowed: false,
+    borrowed_by: ""
+  },
+  {
+    id: "9",
+    title: "The Hobbit",
+    author: "J.R.R. Tolkien",
+    description: "A fantasy adventure about a hobbit’s journey to reclaim a lost kingdom and its treasure.",
+    image: "the_hobbit.jpg",
+    genre: "Fantasy",
+    published_year: "1937",
+    is_borrowed: true,
+    borrowed_by: "121"
+  },
+  {
+    id: "10",
+    title: "Crime and Punishment",
+    author: "Fyodor Dostoevsky",
+    description: "A psychological drama about guilt and redemption after committing a murder.",
+    image: "crime_and_punishment.jpg",
+    genre: "Philosophical",
+    published_year: "1866",
+    is_borrowed: false,
+    borrowed_by: ""
+  },
+  {
+    id: "11",
+    title: "Jane Eyre",
+    author: "Charlotte Brontë",
+    description: "A novel following an orphaned girl's journey towards independence and love.",
+    image: "jane_eyre.jpg",
+    genre: "Gothic Fiction",
+    published_year: "1847",
+    is_borrowed: false,
+    borrowed_by: ""
+  },
+  {
+    id: "12",
+    title: "The Lord of the Rings",
+    author: "J.R.R. Tolkien",
+    description: "An epic fantasy about the battle for the fate of Middle-earth.",
+    image: "lord_of_the_rings.jpg",
+    genre: "Fantasy",
+    published_year: "1954",
+    is_borrowed: true,
+    borrowed_by: "132"
+  },
+  {
+    id: "13",
+    title: "The Alchemist",
+    author: "Paulo Coelho",
+    description: "A philosophical novel about a shepherd's journey to fulfill his personal legend.",
+    image: "the_alchemist.jpg",
+    genre: "Adventure",
+    published_year: "1988",
+    is_borrowed: false,
+    borrowed_by: ""
+  },
+  {
+    id: "14",
+    title: "The Odyssey",
+    author: "Homer",
+    description: "An ancient Greek epic poem chronicling Odysseus's journey home after the Trojan War.",
+    image: "the_odyssey.jpg",
+    genre: "Epic",
+    published_year: "8th Century BC",
+    is_borrowed: true,
+    borrowed_by: "140"
+  },
+  {
+    id: "15",
+    title: "The Kite Runner",
+    author: "Khaled Hosseini",
+    description: "A story of friendship and redemption set in a changing Afghanistan.",
+    image: "the_kite_runner.jpg",
+    genre: "Fiction",
+    published_year: "2003",
+    is_borrowed: false,
+    borrowed_by: ""
+  },
+  {
+    id: "16",
+    title: "Frankenstein",
+    author: "Mary Shelley",
+    description: "The tragic story of a scientist's creation of a monster and the consequences of playing god.",
+    image: "frankenstein.jpg",
+    genre: "Gothic Fiction",
+    published_year: "1818",
+    is_borrowed: false,
+    borrowed_by: ""
+  },
+  {
+    id: "17",
+    title: "The Da Vinci Code",
+    author: "Dan Brown",
+    description: "A thrilling mystery about secret societies and religious conspiracy.",
+    image: "the_da_vinci_code.jpg",
+    genre: "Mystery",
+    published_year: "2003",
+    is_borrowed: true,
+    borrowed_by: "152"
+  },
+  {
+    id: "18",
+    title: "The Road",
+    author: "Cormac McCarthy",
+    description: "A post-apocalyptic novel about a father and son's survival journey.",
+    image: "the_road.jpg",
+    genre: "Dystopian",
+    published_year: "2006",
+    is_borrowed: false,
+    borrowed_by: ""
+  },
+  {
+    id: "19",
+    title: "The Picture of Dorian Gray",
+    author: "Oscar Wilde",
+    description: "A philosophical novel about vanity, moral corruption, and the pursuit of eternal youth.",
+    image: "dorian_gray.jpg",
+    genre: "Philosophical Fiction",
+    published_year: "1890",
+    is_borrowed: false,
+    borrowed_by: ""
+  },
+  {
+    id: "20",
+    title: "The Shining",
+    author: "Stephen King",
+    description: "A horror novel about a family trapped in a haunted hotel.",
+    image: "the_shining.jpg",
+    genre: "Horror",
+    published_year: "1977",
+    is_borrowed: true,
+    borrowed_by: "163"
+  }
+];
