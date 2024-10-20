@@ -1,11 +1,11 @@
 import { Search } from "lucide-react";
-import { searchBookAtom } from "../lib/atoms";
-import { useAtom } from "jotai";
+import { useState } from "react";
 
 const FilterBooks = () => {
-  const [searchTerm, setSearchTerm] = useAtom(searchBookAtom);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const handleSearchChange = (e) => {
+    console.log(e.target.value);
     setSearchTerm(e.target.value);
   };
 

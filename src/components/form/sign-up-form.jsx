@@ -2,11 +2,9 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signupFormSchema } from "../../lib/schema";
-import useAuth from "../../hooks/use-auth";
 import { InputField } from "./input-field";
 
 const SignUpForm = () => {
-  const { signUp } = useAuth();
   const {
     register,
     handleSubmit,
@@ -17,7 +15,6 @@ const SignUpForm = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-    signUp(data.name, data.username, data.email, data.password);
   };
 
   return (

@@ -4,14 +4,12 @@ import { InputField } from "./input-field";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { addBookFormSchema } from "../../lib/schema";
-import { useBook } from "../../hooks/use-book";
 
 const EditBookForm = (props) => {
   const { Title, Description, Author, Year, ImageURI, Genre } = props;
   const [isOpen, setIsOpen] = useState(false);
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
-  const { editBookMutation } = useBook();
 
   const {
     register,
@@ -31,19 +29,7 @@ const EditBookForm = (props) => {
   });
 
   const onSubmit = (data) => {
-    editBookMutation.mutate(
-      {
-        bookId: props.ID,
-        bookData: data,
-      },
-      {
-        onSuccess: () => {
-          alert("Book updated successfully");
-          reset();
-          closeModal();
-        },
-      }
-    );
+    console.log(data);
   };
 
   return (

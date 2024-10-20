@@ -4,13 +4,11 @@ import { InputField } from "./input-field";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { addBookFormSchema } from "../../lib/schema";
-import { useBook } from "../../hooks/use-book";
 
 const AddBookForm = () => {
   const [isOpen, setIsOpen] = useState(false);
   const openModal = () => setIsOpen(true);
   const closeModal = () => setIsOpen(false);
-  const { postBookMutation } = useBook();
 
   const {
     register,
@@ -22,12 +20,7 @@ const AddBookForm = () => {
   });
 
   const onSubmit = (data) => {
-    postBookMutation.mutate(data, {
-      onSuccess: () => {
-        reset();
-        closeModal();
-      },
-    });
+    console.log(data);
   };
 
   return (

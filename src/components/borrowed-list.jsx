@@ -1,34 +1,15 @@
 import { BookMarked, X } from "lucide-react";
 import { useState } from "react";
-import { useBook } from "../hooks/use-book";
-import { useNavigate } from "react-router-dom";
 
 export const BorrowedList = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const navigate = useNavigate();
-
-  const {
-    borrowBookQuery: { data: borrowedBooks },
-  } = useBook();
-  const {
-    bookQuery: { data: books },
-    returnBookMutation,
-  } = useBook();
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
-  const borrowedBooksWithBookData = borrowedBooks?.data?.map((borrowedBook) => {
-    const book = books?.data?.find((book) => book.ID === borrowedBook.BookID);
-    return { ...borrowedBook, ...book };
-  });
+  const borrowedBooksWithBookData = [];
 
   const handleReturn = (bookId) => {
-    returnBookMutation.mutate(bookId, {
-      onSuccess: () => {
-        alert(`${bookId} has been returned!`);
-        navigate(0);
-      },
-    });
+    console.log("Returning book:", bookId);
   };
 
   return (

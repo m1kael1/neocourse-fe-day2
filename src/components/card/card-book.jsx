@@ -1,23 +1,14 @@
 import { useState } from "react";
-import { useBook } from "../../hooks/use-book";
 import { X } from "lucide-react";
-import { useNavigate } from "react-router-dom";
 
 export const CardBook = ({ data }) => {
   const { ID, Title, Description, Author, Year, ImageURI, Available } = data;
-  const { borrowBookMutation } = useBook();
-  const navigate = useNavigate();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const toggleModal = () => setIsModalOpen(!isModalOpen);
 
   const handleBorrow = () => {
-    borrowBookMutation.mutate(ID, {
-      onSuccess: () => {
-        alert(`${Title} has been borrowed!`);
-        navigate(0);
-      },
-    });
+    console.log("Borrowing");
   };
 
   return (

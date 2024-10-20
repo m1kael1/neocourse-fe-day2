@@ -1,12 +1,10 @@
 import { Link } from "react-router-dom";
-import useAuth from "../../hooks/use-auth";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signinFormSchema } from "../../lib/schema";
 import { useForm } from "react-hook-form";
 import { InputField } from "./input-field";
 
 const SignInForm = () => {
-  const { signIn } = useAuth();
   const {
     register,
     handleSubmit,
@@ -16,7 +14,7 @@ const SignInForm = () => {
   });
 
   const onSubmit = (data) => {
-    signIn(data.email, data.password);
+    console.log(data);
   };
 
   return (

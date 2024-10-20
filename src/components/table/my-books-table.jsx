@@ -1,16 +1,9 @@
 import { Trash } from "lucide-react";
 import EditBookForm from "../form/edit-book-form";
-import { useBook } from "../../hooks/use-book";
 
 const MyBooksTable = ({ books }) => {
-  const { deleteBookMutation } = useBook();
-
   const handleDelete = (bookId) => {
-    deleteBookMutation.mutate(bookId, {
-      onSuccess: () => {
-        alert(`${bookId} has been deleted!`);
-      },
-    });
+    console.log("Deleting book:", bookId);
   };
 
   return (
