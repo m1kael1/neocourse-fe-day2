@@ -1,11 +1,8 @@
 import axios from "axios";
-import { useAtom } from "jotai";
-import { authUserAtom } from "./atoms";
 
 export const instance = axios.create({
-  baseURL: 'http://127.0.0.1:8081/api/v1',
+  baseURL: import.meta.env.VITE_BASE_API_URL,
 });
-
 
 instance.interceptors.request.use(
   (config) => {

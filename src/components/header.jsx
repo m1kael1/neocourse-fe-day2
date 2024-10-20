@@ -1,7 +1,7 @@
 import { BookUser, Library, LogOutIcon } from "lucide-react";
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { BorrowedList } from "./borowed-list";
+import { BorrowedList } from "./borrowed-list";
 import useAuth from "../hooks/use-auth";
 
 const Header = () => {

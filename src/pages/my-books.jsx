@@ -7,11 +7,10 @@ const MyBooks = () => {
   const {
     bookQuery: { data: books },
   } = useBook();
-  const { data } = useAuth();
+  const { data: authData } = useAuth();
 
-  const myBooks = books?.data?.filter(
-    (book) => book.StoredBy === data?.user?.ID
-  );
+  const myBooks =
+    books?.data?.filter((book) => book.StoredBy === authData?.user?.ID) || [];
 
   return (
     <div className='container mx-8 sm:mx-auto w-full my-8'>

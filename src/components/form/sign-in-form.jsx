@@ -17,7 +17,6 @@ const SignInForm = () => {
 
   const onSubmit = (data) => {
     signIn(data.email, data.password);
-    console.log(data);
   };
 
   return (

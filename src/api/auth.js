@@ -12,6 +12,7 @@ const newAuthUser = async (userData) => {
     }
     return authData
   } catch (error) {
+    console.log(error);
     throw new Error('Something went wrong');
   }
 }

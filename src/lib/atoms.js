@@ -2,20 +2,9 @@ import { atom } from 'jotai'
 import { atomWithStorage } from 'jotai/utils'
 
 
-const authUserAtom = atomWithStorage('user', null)
+const authUserAtom = atomWithStorage('user',
+  localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null
+)
+const searchBookAtom = atom('')
 
-const bookAtom = atom({
-  id: "",
-  title: "",
-  author: "",
-  description: "",
-  image: "",
-  genre: "",
-  published_year: "",
-  is_borrowed: false,
-  borrowed_by: "" // user id fk 
-})
-
-const borrowsAtom = atom([])
-
-export { authUserAtom, bookAtom, borrowsAtom }
+export { authUserAtom, searchBookAtom }

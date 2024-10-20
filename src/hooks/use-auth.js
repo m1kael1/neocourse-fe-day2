@@ -9,24 +9,17 @@ export default function useAuth() {
 
 
   const signUp = async (name, username, email, password) => {
-    const authData = await newAuthUser({ name, username, email, password })
-    setData(authData)
-    if (data) {
-      navigate('/')
-    }
+    await newAuthUser({ name, username, email, password })
+    navigate('/sign-in')
   }
 
   const signIn = (email, password) => {
     const authData = authenticateUser({ email, password })
     setData(authData)
-    if (data) {
-      navigate('/')
-    }
   }
 
   const signOut = () => {
     setData(null)
-    navigate('/sign-in')
   }
 
   return { data, signIn, signOut, signUp }

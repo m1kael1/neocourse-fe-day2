@@ -1,28 +1,35 @@
-import { useAtom } from "jotai";
 import { BookMarked, X } from "lucide-react";
-import React, { useState } from "react";
-import { borrowsAtom } from "../lib/atoms";
-import useAuth from "../hooks/use-auth";
+import { useState } from "react";
+import { useBook } from "../hooks/use-book";
+import { useNavigate } from "react-router-dom";
 
 export const BorrowedList = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [borrows, setBorrows] = useAtom(borrowsAtom);
-  const { data: authUserData } = useAuth();
+  const navigate = useNavigate();
+
+  const {
+    borrowBookQuery: { data: borrowedBooks },
+  } = useBook();
+  const {
+    bookQuery: { data: books },
+    returnBookMutation,
+  } = useBook();
 
   const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
 
-  const handleReturn = (bookId) => {
-    // sementara
-    setBorrows((prevBooks) =>
-      prevBooks.map((book) =>
-        book.ID === bookId ? { ...book, Borrows: null } : book
-      )
-    );
-  };
+  const borrowedBooksWithBookData = borrowedBooks?.data?.map((borrowedBook) => {
+    const book = books?.data?.find((book) => book.ID === borrowedBook.BookID);
+    return { ...borrowedBook, ...book };
+  });
 
-  const borrowedBooks = borrows.filter(
-    (book) => book.Borrows === authUserData?.user?.ID
-  );
+  const handleReturn = (bookId) => {
+    returnBookMutation.mutate(bookId, {
+      onSuccess: () => {
+        alert(`${bookId} has been returned!`);
+        navigate(0);
+      },
+    });
+  };
 
   return (
     <>
@@ -59,8 +66,8 @@ export const BorrowedList = () => {
         <div className='p-4 overflow-y-auto h-full'>
           <h2 className='text-lg font-bold mb-4'>Your Borrowed Books</h2>
           <ul className='space-y-3'>
-            {borrowedBooks.length ? (
-              borrowedBooks.map((book) => (
+            {borrowedBooksWithBookData?.length ? (
+              borrowedBooksWithBookData?.map((book) => (
                 <li
                   key={book.ID}
                   className='p-3 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors shadow-sm'
@@ -68,7 +75,6 @@ export const BorrowedList = () => {
                   <h4 className='text-md font-semibold'>{book.Title}</h4>
                   <p className='text-sm text-gray-600'>{book.Author}</p>
 
-                  {/* Return Button */}
                   <button
                     className='mt-2 py-1 px-3 rounded-md bg-red-500 text-white hover:bg-red-600 transition-colors'
                     onClick={() => handleReturn(book.ID)}

@@ -1,37 +1,23 @@
 import { useState } from "react";
 import { useBook } from "../../hooks/use-book";
 import { X } from "lucide-react";
-import { useAtom } from "jotai";
-import { borrowsAtom } from "../../lib/atoms";
-import useAuth from "../../hooks/use-auth";
+import { useNavigate } from "react-router-dom";
 
 export const CardBook = ({ data }) => {
-  const { ID, Title, Description, Author, Year, ImageURI, Borrows } = data;
+  const { ID, Title, Description, Author, Year, ImageURI, Available } = data;
   const { borrowBookMutation } = useBook();
-  const { data: userAuthData } = useAuth();
-  const [, setBorrows] = useAtom(borrowsAtom);
+  const navigate = useNavigate();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const toggleModal = () => setIsModalOpen(!isModalOpen);
 
   const handleBorrow = () => {
-    // borrowBookMutation.mutate(ID, {
-    //   onSuccess: () => {
-    //     alert(`${Title} has been borrowed!`);
-    //   },
-    // });
-    setBorrows((prevBorrows) => [
-      ...prevBorrows,
-      {
-        ID,
-        Title,
-        Description,
-        Author,
-        Year,
-        ImageURI,
-        Borrows: userAuthData?.user?.ID,
+    borrowBookMutation.mutate(ID, {
+      onSuccess: () => {
+        alert(`${Title} has been borrowed!`);
+        navigate(0);
       },
-    ]);
+    });
   };
 
   return (
@@ -90,7 +76,7 @@ export const CardBook = ({ data }) => {
                 <p className='text-gray-500'>{Year}</p>
                 <p className='text-gray-700 mt-2'>
                   Status:{" "}
-                  {Borrows ? (
+                  {!Available ? (
                     <span className='text-red-500'>Borrowed</span>
                   ) : (
                     <span className='text-green-500'>Available</span>
@@ -106,14 +92,14 @@ export const CardBook = ({ data }) => {
             <div className='mt-6 flex justify-end'>
               <button
                 className={`py-2 px-4 rounded-md font-medium text-white transition-colors ${
-                  Borrows
+                  !Available
                     ? "bg-gray-400 cursor-not-allowed"
                     : "bg-blue-500 hover:bg-blue-600"
                 }`}
                 onClick={handleBorrow}
-                disabled={Borrows}
+                disabled={!Available}
               >
-                {Borrows ? "Unavailable" : "Borrow"}
+                {!Available ? "Unavailable" : "Borrow"}
               </button>
               <button
                 className='py-2 px-4 ml-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors'
